@@ -1,1 +1,62 @@
+//This is Puesdo-Code for us to work off of. 
+
+//any needed functions here
+
+//any variables here
+//general
+int covered; 
+int activate; 
+
+//analog
+
+//actuator
+
+//serial
+uint8_t test =0b10000000;
+int8_t actualtemp;
+int8_t actualtemp2;
+int16_t temp; 
+int16_t lowtemp = 0b0000110010011111;
+//esp 32
+
+void main(void)
+{
+    // Initialize the device, subsystem stuff, ect
+    SYSTEM_Initialize();
+    //initalize interupts 
+    
+    while(1){
+    //read spi/analog
+    
+    while(covered==0){
+    if(temp==lowtemp){
+    activate=1;
+    }
+    //photodiode here
+    
+    if(activate==1){
+    //acitivate motor
+    covered=1;
+    //send status update, or whatever ian wants to do with wifi
+    }
+   
+   }
+   while(covered==1){
+   if(temp>lowtemp){
+   activate=0;
+   }
+   //photodiode here
+   
+   if(activate==0){
+   //reverse motor
+   covered=0;
+   //send status update, or whatever ian wants to do with wifi
+   }
+   }
+    
+    
+    }
+    
+    
+    }
 
