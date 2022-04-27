@@ -1,6 +1,19 @@
 //This is Puesdo-Code for us to work off of. 
 
 //any needed functions here
+//SPI Initalize 
+uint8_t SPI1_Master_RecieveOnly (uint8_t data)
+{
+SPI1CON2bits.TXR = 0; //Transmit Data-Required Bit;
+SPI1CON2bits.RXR = 1; // Receive FIFO Space-Required Bit;
+SPI1TCNT = 1; // Load SPI Transfer Counter;
+SPI1TXB = data; // Load data into SPI transmit buffer;
+//while (PIR2bits.SPI1RXIF == 0); // Check for any SPI Receive Interrupts;
+return (SPI1RXB); // Return data from SPI Receive Buffer Register;
+}
+
+
+
 
 //any variables here
 //general
@@ -12,6 +25,13 @@ int activate;
 //actuator
 
 //serial
+//configuration 
+SPI1CON1 = 0x01;   //E2; // CKE; CKP; SDI/SDO Polarity;
+SPI1CON2 = 0x07; // TXR; RXR;
+SPI1BAUD = 0xFF; // SPI Baud Pre-Scaler;
+SPI1CLK = 0x02; // SPI Clock Select;
+SPI1CON0 = 0x82; // SPI Enable; BMODE; Master/Slave; MSb/LSb;
+//variables
 uint8_t test =0b10000000;
 int8_t actualtemp;
 int8_t actualtemp2;
@@ -27,7 +47,18 @@ void main(void)
     
     while(1){
     //read spi/analog
-    
+    CS_SetLow(); 
+        __delay_ms(500);
+        actualtemp=SPI1_Master_RecieveOnly(test);
+        CS_SetHigh(); 
+        __delay_ms(1);
+      CS_SetLow(); 
+        __delay_ms(500);
+        actualtemp2=SPI1_ReadyByte();
+         CS_SetHigh(); 
+        __delay_ms(1);
+     temp = (actualtemp << 8) | actualtemp2;
+       temp >>= 7;
     while(covered==0){
     if(temp==lowtemp){
     activate=1;
