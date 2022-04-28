@@ -1,5 +1,9 @@
 //This is Puesdo-Code for us to work off of. 
 
+#define steps 4000 // how much step it will take
+#define clockwise 0 // clockwise direction macro
+#define anti_clockwise 1 // anti clockwise direction macro
+
 //any needed functions here
 //SPI Initalize 
 uint8_t SPI1_Master_RecieveOnly (uint8_t data)
@@ -12,6 +16,248 @@ SPI1TXB = data; // Load data into SPI transmit buffer;
 return (SPI1RXB); // Return data from SPI Receive Buffer Register;
 }
 
+//Motor Functions
+void ms_delay(unsigned int val)
+{
+    while(val>0)
+    {
+        val--;
+        __delay_ms(1);
+    }
+}
+
+/*
+                         Main application
+ */
+
+void system_init (void)
+{
+    //TRISB = 0x00;     // PORT B as output port
+    //PORTB = 0x0F;
+    EN_SetLow();
+    __delay_ms(1);
+    
+    IN_1A_SetLow();
+    IN_1B_SetLow();
+    IN_2A_SetLow();
+    IN_2B_SetLow();
+}
+
+
+
+void full_step_CW (step)
+    {
+    EN_SetHigh();
+    
+    for(int i=0; i<step; i++)
+    {
+        
+        IN_1A_SetHigh();
+        IN_1B_SetLow();
+        IN_2A_SetLow();
+        IN_2B_SetHigh();
+
+        __delay_ms(1);
+
+        IN_1A_SetHigh();
+        IN_1B_SetHigh();
+        IN_2A_SetLow();
+        IN_2B_SetLow();
+
+        __delay_ms(1);
+        
+        IN_1A_SetLow();
+        IN_1B_SetHigh();
+        IN_2A_SetHigh();
+        IN_2B_SetLow();
+
+        __delay_ms(1);
+
+        IN_1A_SetLow();
+        IN_1B_SetLow();
+        IN_2A_SetHigh();
+        IN_2B_SetHigh();
+
+        __delay_ms(1);
+    }
+    
+    EN_SetLow();
+}
+
+void full_step_CCW (step){
+
+    EN_SetHigh();
+    
+    for(int i=0; i<step; i++)
+    {
+        
+        IN_1A_SetHigh();
+        IN_1B_SetLow();
+        IN_2A_SetLow();
+        IN_2B_SetHigh();
+
+        __delay_ms(1);
+
+        IN_1A_SetLow();
+        IN_1B_SetLow();
+        IN_2A_SetHigh();
+        IN_2B_SetHigh();
+
+        __delay_ms(1);
+             
+        IN_1A_SetLow();
+        IN_1B_SetHigh();
+        IN_2A_SetHigh();
+        IN_2B_SetLow();
+
+        __delay_ms(1);
+        
+        IN_1A_SetHigh();
+        IN_1B_SetHigh();
+        IN_2A_SetLow();
+        IN_2B_SetLow();
+
+        __delay_ms(1);
+        
+        EN_SetLow();
+    }
+}
+
+void half_step_CW (step)
+    {
+    EN_SetHigh();
+    
+    for(int i=0; i<step; i++)
+    {
+        
+        IN_1A_SetHigh();
+        IN_1B_SetLow();
+        IN_2A_SetLow();
+        IN_2B_SetLow();
+
+        __delay_ms(1);
+
+        IN_1A_SetHigh();
+        IN_1B_SetHigh();
+        IN_2A_SetLow();
+        IN_2B_SetLow();
+
+        __delay_ms(1);
+        
+        IN_1A_SetLow();
+        IN_1B_SetHigh();
+        IN_2A_SetLow();
+        IN_2B_SetLow();
+
+        __delay_ms(1);
+
+        IN_1A_SetLow();
+        IN_1B_SetHigh();
+        IN_2A_SetHigh();
+        IN_2B_SetLow();
+
+        __delay_ms(1);
+        
+        IN_1A_SetLow();
+        IN_1B_SetLow();
+        IN_2A_SetHigh();
+        IN_2B_SetLow();
+
+        __delay_ms(1);
+        
+        IN_1A_SetLow();
+        IN_1B_SetLow();
+        IN_2A_SetHigh();
+        IN_2B_SetHigh();
+
+        __delay_ms(1);
+        
+        IN_1A_SetLow();
+        IN_1B_SetLow();
+        IN_2A_SetLow();
+        IN_2B_SetHigh();
+
+        __delay_ms(1);
+        
+        IN_1A_SetHigh();
+        IN_1B_SetLow();
+        IN_2A_SetLow();
+        IN_2B_SetHigh();
+
+        __delay_ms(1);
+    }
+    
+    EN_SetLow();
+}
+
+
+void half_step_CCW (step)
+    {
+    EN_SetHigh();
+    
+    for(int i=0; i<step; i++)
+    {
+        
+        IN_1A_SetHigh();
+        IN_1B_SetLow();
+        IN_2A_SetLow();
+        IN_2B_SetLow();
+
+        __delay_ms(1);
+        
+        IN_1A_SetHigh();
+        IN_1B_SetLow();
+        IN_2A_SetLow();
+        IN_2B_SetHigh();
+
+        __delay_ms(1);
+        
+        IN_1A_SetLow();
+        IN_1B_SetLow();
+        IN_2A_SetLow();
+        IN_2B_SetHigh();
+
+        __delay_ms(1);
+        
+        IN_1A_SetLow();
+        IN_1B_SetLow();
+        IN_2A_SetHigh();
+        IN_2B_SetHigh();
+
+        __delay_ms(1);
+        
+        IN_1A_SetLow();
+        IN_1B_SetLow();
+        IN_2A_SetHigh();
+        IN_2B_SetLow();
+
+        __delay_ms(1);
+        
+        IN_1A_SetLow();
+        IN_1B_SetHigh();
+        IN_2A_SetHigh();
+        IN_2B_SetLow();
+
+        __delay_ms(1);
+        
+        IN_1A_SetLow();
+        IN_1B_SetHigh();
+        IN_2A_SetLow();
+        IN_2B_SetLow();
+
+        __delay_ms(1);
+
+        IN_1A_SetHigh();
+        IN_1B_SetHigh();
+        IN_2A_SetLow();
+        IN_2B_SetLow();
+
+        __delay_ms(1);        
+        
+    }
+    
+    EN_SetLow();
+}
 
 
 
@@ -21,8 +267,10 @@ int covered;
 int activate; 
 
 //analog
+uint8_t ADC_Result;
 
 //actuator
+int step;
 
 //serial
 //configuration 
@@ -43,10 +291,19 @@ void main(void)
 {
     // Initialize the device, subsystem stuff, ect
     SYSTEM_Initialize();
+    adc_result_t ADC_Result;
+     ADCC_Initialize();
     //initalize interupts 
+    
     
     while(1){
     //read spi/analog
+    
+    //Analog
+    ADCC_StartConversion(ADC_IN);
+        ADC_Result = ADCC_GetConversionResult();
+    
+    //SPI
     CS_SetLow(); 
         __delay_ms(500);
         actualtemp=SPI1_Master_RecieveOnly(test);
@@ -62,28 +319,33 @@ void main(void)
     while(covered==0){
     if(temp==lowtemp){
     activate=1;
-    }
-    //photodiode here
+    }  
+    if(ADC_Result <= 2404){
+            activate=1;           
+        }
     
     if(activate==1){
     //acitivate motor
     covered=1;
     //send status update, or whatever ian wants to do with wifi
     }
+    __delay_ms(100);
    
    }
    while(covered==1){
    if(temp>lowtemp){
    activate=0;
    }
-   //photodiode here
-   
+   if(ADC_Result > 2404){
+            activate=1;           
+   }
    if(activate==0){
    //reverse motor
    covered=0;
    //send status update, or whatever ian wants to do with wifi
    }
    }
+   __delay_ms(100);
     
     
     }
