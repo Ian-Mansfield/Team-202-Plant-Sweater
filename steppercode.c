@@ -25,7 +25,7 @@ void system_init (void)
     //TRISB = 0x00;     // PORT B as output port
     //PORTB = 0x0F;
     EN_SetLow();
-    __delay_ms(1);
+    __delay_ms(10);
     
     IN_1A_SetLow();
     IN_2A_SetLow();
@@ -48,28 +48,28 @@ void full_step_CW (step)
         IN_1B_SetLow();
         IN_2B_SetHigh();
 
-        __delay_ms(1);
+        __delay_us(1000);
 
         IN_1A_SetHigh();
         IN_2A_SetHigh();
         IN_1B_SetLow();
         IN_2B_SetLow();
 
-        __delay_ms(1);
+        __delay_us(1000);
         
         IN_1A_SetLow();
         IN_2A_SetHigh();
         IN_1B_SetHigh();
         IN_2B_SetLow();
 
-        __delay_ms(1);
-
+        __delay_us(1000);
+        
         IN_1A_SetLow();
         IN_2A_SetLow();
         IN_1B_SetHigh();
         IN_2B_SetHigh();
 
-        __delay_ms(1);
+        __delay_us(1000);
     }
     
     EN_SetLow();
@@ -88,28 +88,28 @@ void full_step_CCW (step){
         IN_1B_SetLow();
         IN_2B_SetHigh();
 
-        __delay_ms(10);
+        __delay_us(1000);
 
         IN_1A_SetLow();
         IN_2A_SetLow();
         IN_1B_SetHigh();
         IN_2B_SetHigh();
 
-        __delay_ms(10);
+        __delay_us(1000);
              
         IN_1A_SetLow();
         IN_2A_SetHigh();
         IN_1B_SetHigh();
         IN_2B_SetLow();
 
-        __delay_ms(10);
+        __delay_us(1000);
         
         IN_1A_SetHigh();
         IN_2A_SetHigh();
         IN_1B_SetLow();
         IN_2B_SetLow();
 
-        __delay_ms(10);
+        __delay_us(1000);
         
         EN_SetLow();
     }
@@ -117,72 +117,6 @@ void full_step_CCW (step){
 
 // -- HALF STEP FUNCTIONS ------------------------------------------------------
 
-void half_step_CW_wrong (step)
-    {
-    EN_SetHigh();
-    
-    for(int i=0; i<step; i++)
-    {
-        
-        IN_1A_SetHigh();
-        IN_1B_SetLow();
-        IN_2A_SetLow();
-        IN_2B_SetLow();
-
-        __delay_ms(1);
-
-        IN_1A_SetHigh();
-        IN_1B_SetHigh();
-        IN_2A_SetLow();
-        IN_2B_SetLow();
-
-        __delay_ms(1);
-        
-        IN_1A_SetLow();
-        IN_1B_SetHigh();
-        IN_2A_SetLow();
-        IN_2B_SetLow();
-
-        __delay_ms(1);
-
-        IN_1A_SetLow();
-        IN_1B_SetHigh();
-        IN_2A_SetHigh();
-        IN_2B_SetLow();
-
-        __delay_ms(1);
-        
-        IN_1A_SetLow();
-        IN_1B_SetLow();
-        IN_2A_SetHigh();
-        IN_2B_SetLow();
-
-        __delay_ms(1);
-        
-        IN_1A_SetLow();
-        IN_1B_SetLow();
-        IN_2A_SetHigh();
-        IN_2B_SetHigh();
-
-        __delay_ms(1);
-        
-        IN_1A_SetLow();
-        IN_1B_SetLow();
-        IN_2A_SetLow();
-        IN_2B_SetHigh();
-
-        __delay_ms(1);
-        
-        IN_1A_SetHigh();
-        IN_1B_SetLow();
-        IN_2A_SetLow();
-        IN_2B_SetHigh();
-        
-        __delay_ms(1);
-    }
-    
-    EN_SetLow();
-}
 
 void half_step_CW (step) //BUILD OFF THIS ONE
     {
@@ -263,56 +197,56 @@ void half_step_CCW (step)
         IN_1B_SetLow();
         IN_2B_SetLow();
 
-        __delay_ms(1);
+        __delay_us(1000);
         
         IN_1A_SetHigh();
         IN_2A_SetLow();
         IN_1B_SetLow();
         IN_2B_SetHigh();
 
-        __delay_ms(1);
+        __delay_us(1000);
         
         IN_1A_SetLow();
         IN_2A_SetLow();
         IN_1B_SetLow();
         IN_2B_SetHigh();
 
-        __delay_ms(1);
+        __delay_us(1000);
         
         IN_1A_SetLow();
         IN_2A_SetLow();
         IN_1B_SetHigh();
         IN_2B_SetHigh();
 
-        __delay_ms(1);
+        __delay_us(1000);
         
         IN_1A_SetLow();
         IN_2A_SetLow();
         IN_1B_SetHigh();
         IN_2B_SetLow();
 
-        __delay_ms(1);
+        __delay_us(1000);
         
         IN_1A_SetLow();
         IN_2A_SetHigh();
         IN_1B_SetHigh();
         IN_2B_SetLow();
 
-        __delay_ms(1);
+        __delay_us(1000);
         
         IN_1A_SetLow();
         IN_2A_SetHigh();
         IN_1B_SetLow();
         IN_2B_SetLow();
 
-        __delay_ms(1);
+        __delay_us(1000);
 
         IN_1A_SetHigh();
         IN_2A_SetHigh();
         IN_1B_SetLow();
         IN_2B_SetLow();
 
-        __delay_ms(1);        
+        __delay_us(1000);       
         
     }
     
