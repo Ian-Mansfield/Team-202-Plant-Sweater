@@ -5,6 +5,24 @@
 #define anti_clockwise 1 // anti clockwise direction macro
 
 //any needed functions here
+
+//ISR stuff
+uint8_t rxData=0; 
+uint8_t motorstate = 0;
+void UART1_Receive_ISR_Eon1(void)
+{
+    UART1_Receive_ISR();
+    
+    if (UART1_is_rx_ready()== true)  {   
+       rxData = UART1_Read();
+       motorstate = rxData;
+   
+     //EUSART2_Write(rxData1);
+ 
+        }
+
+}
+
 //SPI Initalize 
 uint8_t SPI1_Master_RecieveOnly (uint8_t data)
 {
@@ -293,8 +311,8 @@ void main(void)
     SYSTEM_Initialize();
     adc_result_t ADC_Result;
      ADCC_Initialize();
-    //initalize interupts 
-    
+      // Enable the Global Interrupts
+    INTERRUPT_GlobalInterruptEnable();
     
     while(1){
     //read spi/analog
@@ -302,6 +320,9 @@ void main(void)
     //Analog
     ADCC_StartConversion(ADC_IN);
         ADC_Result = ADCC_GetConversionResult();
+    
+    //ADC_Result to MQTT
+    printf("Light Value is:, %i\r\n", ADC_Result);
     
     //SPI
     CS_SetLow(); 
